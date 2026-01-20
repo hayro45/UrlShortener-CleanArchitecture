@@ -54,6 +54,12 @@ This project follows **Onion Architecture (Clean Architecture)** with strict lay
 - **Rolling File Logs** - Daily log files with 7-day retention
 - **Enriched Context** - Correlation IDs and diagnostic context
 
+### Health Checks
+- **Database Health Check** - PostgreSQL connection monitoring
+- **Multiple Endpoints** - `/health`, `/health/ready`, `/health/live`
+- **JSON Response Format** - Detailed health status with timing metrics
+- **Kubernetes-Ready** - Liveness and readiness probes
+
 ## 🚀 Getting Started
 
 ### Prerequisites
