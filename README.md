@@ -71,6 +71,12 @@ This project follows **Onion Architecture (Clean Architecture)** with strict lay
 - **429 Response** - Proper "Too Many Requests" error messages
 - **DDoS Protection** - Prevents abuse and ensures fair usage
 
+### Response Compression
+- **Brotli & Gzip** - Modern and legacy browser support
+- **Automatic Compression** - Based on Accept-Encoding header
+- **HTTPS Enabled** - Compression over secure connections
+- **Bandwidth Savings** - Reduced response sizes
+
 ## 🚀 Getting Started
 
 ### Prerequisites
