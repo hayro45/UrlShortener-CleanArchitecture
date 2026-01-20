@@ -60,6 +60,11 @@ This project follows **Onion Architecture (Clean Architecture)** with strict lay
 - **JSON Response Format** - Detailed health status with timing metrics
 - **Kubernetes-Ready** - Liveness and readiness probes
 
+### CORS
+- **Flexible Configuration** - Allow all origins for development
+- **Production-Ready Comments** - Guidance for specific origin configuration
+- **Frontend Integration** - Ready for React, Angular, Vue.js applications
+
 ## 🚀 Getting Started
 
 ### Prerequisites
