@@ -1,0 +1,36 @@
+# URL Shortener - Docker Ignore
+# Excludes files not needed in the Docker build context
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Build outputs
+**/bin/
+**/obj/
+**/out/
+
+# Test results
+**/TestResults/
+**/coverage/
+
+# Documentation
+*.md
+!README.md
+
+# Docker files (not needed in context)
+docker-compose*.yml
+docker-compose*.yaml
+
+# Misc
+*.log
+*.tmp
+.env
+.env.*

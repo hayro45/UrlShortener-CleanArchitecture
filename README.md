@@ -1,0 +1,156 @@
+# URL Shortener API
+
+A clean architecture URL shortening service built with .NET 8, demonstrating enterprise-level design patterns and best practices.
+
+## 🏗️ Architecture
+
+This project follows **Onion Architecture (Clean Architecture)** with strict layer separation:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Presentation Layer                       │
+│                 (ASP.NET Core Web API)                      │
+├─────────────────────────────────────────────────────────────┤
+│                   Infrastructure Layer                      │
+│              (EF Core, PostgreSQL, Repositories)            │
+├─────────────────────────────────────────────────────────────┤
+│                    Application Layer                        │
+│       (CQRS Handlers, Validators, DTOs, Use Cases)          │
+├─────────────────────────────────────────────────────────────┤
+│                      Domain Layer                           │
+│            (Entities, Interfaces, Value Objects)            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Layer Responsibilities
+
+| Layer | Description | Dependencies |
+|-------|-------------|--------------|
+| **Domain** | Business entities and repository interfaces | None (Core) |
+| **Application** | Use cases, CQRS commands/queries, validation | Domain |
+| **Infrastructure** | Data access, external services | Domain, Application |
+| **Presentation** | API controllers, configuration | All layers |
+
+## 🛠️ Tech Stack
+
+- **.NET 8** (LTS)
+- **ASP.NET Core Web API**
+- **Entity Framework Core** + **PostgreSQL**
+- **MediatR** (CQRS pattern)
+- **FluentValidation**
+- **Docker & Docker Compose**
+- **xUnit + Moq** (Testing)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+### Running with Docker Compose
+
+```bash
+# Build and start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f api
+
+# Stop services
+docker-compose down
+```
+
+The API will be available at: `http://localhost:5000`
+
+### Running Locally
+
+```bash
+# Start PostgreSQL (using Docker)
+docker run -d --name postgres -p 5432:5432 \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_DB=urlshortener_dev \
+  postgres:16-alpine
+
+# Run the API
+cd src/UrlShortener.Api
+dotnet run
+```
+
+## 📡 API Endpoints
+
+### Create Short URL
+
+```http
+POST /api/urls
+Content-Type: application/json
+
+{
+  "originalUrl": "https://www.example.com/very/long/path"
+}
+```
+
+**Response:**
+```json
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "originalUrl": "https://www.example.com/very/long/path",
+  "shortCode": "abc123X",
+  "createdAt": "2024-01-19T12:00:00Z"
+}
+```
+
+### Get Original URL
+
+```http
+GET /api/urls/{shortCode}
+```
+
+**Response:**
+```json
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "originalUrl": "https://www.example.com/very/long/path",
+  "shortCode": "abc123X",
+  "createdAt": "2024-01-19T12:00:00Z"
+}
+```
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+dotnet test
+
+# Run with coverage
+dotnet test --collect:"XPlat Code Coverage"
+```
+
+## 📁 Project Structure
+
+```
+UrlShortener/
+├── src/
+│   ├── UrlShortener.Domain/          # Entities, Interfaces
+│   ├── UrlShortener.Application/     # CQRS, Validators, DTOs
+│   ├── UrlShortener.Infrastructure/  # EF Core, Repositories
+│   └── UrlShortener.Api/             # Controllers, Startup
+├── tests/
+│   └── UrlShortener.Application.Tests/
+├── docker-compose.yml
+├── Dockerfile
+└── UrlShortener.sln
+```
+
+## 🎯 Design Principles
+
+- **SOLID Principles**
+- **Clean Code**
+- **DRY (Don't Repeat Yourself)**
+- **Separation of Concerns**
+- **Dependency Inversion**
+
+## 📝 License
+
+This project is licensed under the MIT License.
