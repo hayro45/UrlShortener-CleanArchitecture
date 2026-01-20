@@ -138,6 +138,9 @@ app.UseResponseCompression();
 // Global exception handling
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
+// Security headers
+app.UseMiddleware<SecurityHeadersMiddleware>();
+
 // CORS must be before other middleware
 app.UseCors("AllowAll");
 

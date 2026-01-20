@@ -77,6 +77,12 @@ This project follows **Onion Architecture (Clean Architecture)** with strict lay
 - **HTTPS Enabled** - Compression over secure connections
 - **Bandwidth Savings** - Reduced response sizes
 
+### Security Headers
+- **OWASP Recommended** - X-Content-Type-Options, X-Frame-Options, X-XSS-Protection
+- **CSP Policy** - Content Security Policy to prevent XSS attacks
+- **Referrer Policy** - Control referrer information leakage
+- **Server Header Removal** - Hide server implementation details
+
 ## 🚀 Getting Started
 
 ### Prerequisites
