@@ -48,6 +48,12 @@ This project follows **Onion Architecture (Clean Architecture)** with strict lay
 - **Custom Exception Types** - Domain-specific exceptions (NotFoundException, ConflictException)
 - **Environment-Aware Responses** - Stack traces only in Development mode
 
+### Logging
+- **Serilog Integration** - Structured logging with console and file sinks
+- **Request/Response Logging** - Automatic HTTP request logging with timing
+- **Rolling File Logs** - Daily log files with 7-day retention
+- **Enriched Context** - Correlation IDs and diagnostic context
+
 ## 🚀 Getting Started
 
 ### Prerequisites
