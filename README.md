@@ -65,6 +65,12 @@ This project follows **Onion Architecture (Clean Architecture)** with strict lay
 - **Production-Ready Comments** - Guidance for specific origin configuration
 - **Frontend Integration** - Ready for React, Angular, Vue.js applications
 
+### Rate Limiting
+- **Global Rate Limiter** - 10 requests/minute per client
+- **Fixed Window Algorithm** - Simple and effective rate limiting
+- **429 Response** - Proper "Too Many Requests" error messages
+- **DDoS Protection** - Prevents abuse and ensures fair usage
+
 ## 🚀 Getting Started
 
 ### Prerequisites

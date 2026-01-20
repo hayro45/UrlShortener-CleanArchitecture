@@ -28,9 +28,11 @@ public sealed class UrlsController : ControllerBase
     /// <returns>The created short URL details.</returns>
     /// <response code="201">Short URL created successfully.</response>
     /// <response code="400">Invalid URL format.</response>
+    /// <response code="429">Rate limit exceeded.</response>
     [HttpPost]
     [ProducesResponseType(typeof(CreateShortUrlResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status429TooManyRequests)]
     public async Task<IActionResult> Create(
         [FromBody] CreateShortUrlRequest request,
         CancellationToken cancellationToken)
