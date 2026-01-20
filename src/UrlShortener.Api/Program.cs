@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using UrlShortener.Api.Middleware;
 using UrlShortener.Application;
 using UrlShortener.Infrastructure;
 using UrlShortener.Infrastructure.Persistence;
@@ -34,6 +35,9 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
+// Global exception handling (must be first)
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 // Enable Swagger in all environments (for demo/showcase purposes)
 app.UseSwagger();
 app.UseSwaggerUI(options =>

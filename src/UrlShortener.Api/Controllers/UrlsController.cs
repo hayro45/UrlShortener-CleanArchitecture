@@ -1,4 +1,3 @@
-using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using UrlShortener.Application.Features.Urls.Commands.CreateShortUrl;
@@ -36,29 +35,13 @@ public sealed class UrlsController : ControllerBase
         [FromBody] CreateShortUrlRequest request,
         CancellationToken cancellationToken)
     {
-        try
-        {
-            var command = new CreateShortUrlCommand(request.OriginalUrl);
-            var result = await _mediator.Send(command, cancellationToken);
+        var command = new CreateShortUrlCommand(request.OriginalUrl);
+        var result = await _mediator.Send(command, cancellationToken);
 
-            return CreatedAtAction(
-                nameof(GetByShortCode),
-                new { shortCode = result.ShortCode },
-                result);
-        }
-        catch (ValidationException ex)
-        {
-            return BadRequest(new ValidationProblemDetails
-            {
-                Title = "Validation Error",
-                Status = StatusCodes.Status400BadRequest,
-                Errors = ex.Errors
-                    .GroupBy(e => e.PropertyName)
-                    .ToDictionary(
-                        g => g.Key,
-                        g => g.Select(e => e.ErrorMessage).ToArray())
-            });
-        }
+        return CreatedAtAction(
+            nameof(GetByShortCode),
+            new { shortCode = result.ShortCode },
+            result);
     }
 
     /// <summary>

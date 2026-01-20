@@ -41,6 +41,13 @@ This project follows **Onion Architecture (Clean Architecture)** with strict lay
 - **Docker & Docker Compose**
 - **xUnit + Moq** (Testing)
 
+## ✨ Production-Ready Features
+
+### Error Handling
+- **Global Exception Middleware** - Centralized error handling with ProblemDetails format
+- **Custom Exception Types** - Domain-specific exceptions (NotFoundException, ConflictException)
+- **Environment-Aware Responses** - Stack traces only in Development mode
+
 ## 🚀 Getting Started
 
 ### Prerequisites
