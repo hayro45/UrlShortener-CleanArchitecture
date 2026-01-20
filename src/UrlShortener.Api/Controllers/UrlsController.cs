@@ -74,6 +74,40 @@ public sealed class UrlsController : ControllerBase
 
         return Ok(result);
     }
+
+    /// <summary>
+    /// Redirects to the original URL using the short code.
+    /// This is the primary URL shortener functionality.
+    /// </summary>
+    /// <param name="shortCode">The short code to redirect.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Redirect to original URL.</returns>
+    /// <response code="302">Redirecting to original URL.</response>
+    /// <response code="404">Short code not found.</response>
+    [HttpGet("/r/{shortCode}")]
+    [ProducesResponseType(StatusCodes.Status302Found)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Redirect(
+        [FromRoute] string shortCode,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetOriginalUrlQuery(shortCode);
+        var result = await _mediator.Send(query, cancellationToken);
+
+        if (result is null)
+        {
+            return NotFound(new ProblemDetails
+            {
+                Title = "Not Found",
+                Status = StatusCodes.Status404NotFound,
+                Detail = $"Short code '{shortCode}' was not found."
+            });
+        }
+
+        // 302 Found - Temporary redirect (allows tracking)
+        // Use RedirectPermanent (301) if you don't need to track clicks
+        return Redirect(result.OriginalUrl);
+    }
 }
 
 /// <summary>
